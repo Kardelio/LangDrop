@@ -3,4 +3,16 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    
+    <color name="langDropPurple">#6A0098</color>
+    <color name="langDropPurpleDark">#490068</color>
+
+    <color name="landDropRed">#CD0000</color>
+    <color name="landDropRedDark">#8F0000</color>
+
+    <color name="landDropGreen">#05BC05</color>
+    <color name="landDropGreenDark">#088008</color>
+
+    <color name="landDropYellow">#EDCF08</color>
+    <color name="landDropYellowDark">#B6A009</color>
 </resources>

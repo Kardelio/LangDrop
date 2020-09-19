@@ -1,13 +1,13 @@
 package bk.personal.com.langdrop.game.view
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
+import android.widget.*
 import androidx.constraintlayout.motion.widget.MotionLayout
-import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -28,12 +28,12 @@ class GameFragment : Fragment() {
     private lateinit var startButton: Button
     private lateinit var closeButton: Button
 
-    private lateinit var correctButton: Button
-    private lateinit var wrongButton: Button
+    private lateinit var correctButton: ImageButton
+    private lateinit var wrongButton: ImageButton
     private lateinit var fallingText: TextView
     private lateinit var staticText: TextView
     private lateinit var playerScore: TextView
-    private lateinit var playerLives: TextView
+    private lateinit var livesArea: LinearLayout
 
     private lateinit var overButton: Button
     private lateinit var overScoreText: TextView
@@ -53,7 +53,7 @@ class GameFragment : Fragment() {
         correctButton = v.findViewById(R.id.correct_button)
         fallingText = v.findViewById(R.id.falling_text)
         staticText = v.findViewById(R.id.static_text)
-        playerLives = v.findViewById(R.id.player_lives)
+        livesArea = v.findViewById(R.id.lives_area)
         playerScore = v.findViewById(R.id.player_score)
 
         overButton = v.findViewById(R.id.over_screen_button)
@@ -72,10 +72,6 @@ class GameFragment : Fragment() {
         //before the user interacts with the buttons
         viewmodel.submittedAnswer(null)
     }
-
-//    private val activeScreenToGameOverScreenListerner = transitionHelper {
-////        viewmodel.startGame()
-//    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -106,13 +102,35 @@ class GameFragment : Fragment() {
         })
 
         viewmodel.score.observe(viewLifecycleOwner, Observer {
-            playerScore.text = "$it"
+            playerScore.text = "Score: $it"
             overScoreText.text = "$it"
         })
 
         viewmodel.lives.observe(viewLifecycleOwner, Observer {
-            playerLives.text = "$it"
+            renderPlayerLives(it)
         })
+    }
+
+    private fun renderPlayerLives(count: Int) {
+        livesArea.removeAllViews()
+        for (i in 1..PLAYER_MAX_LIVES) {
+            val imageId =
+                if (i > count) {
+                    R.drawable.ic_heart_empty
+                } else {
+                    R.drawable.ic_heart_filled
+                }
+            livesArea.addView(
+                ImageView(context).apply {
+                    layoutParams = LinearLayout.LayoutParams(HEART_SIZE_PIXELS, HEART_SIZE_PIXELS)
+                    setImageDrawable(
+                        ContextCompat.getDrawable(
+                            context,
+                            imageId
+                        )
+                    )
+                })
+        }
     }
 
     private fun renderGameState(gameState: GameState) {
@@ -155,15 +173,33 @@ class GameFragment : Fragment() {
     }
 
     private fun loadActiveWordPair(wordPair: GameWordPair) {
-        fallingText.text = wordPair.eng
-        staticText.text = wordPair.spa
+        staticText.text = wordPair.eng
+        fallingText.text = wordPair.spa
     }
 
     private fun closeApp() {
         requireActivity().finish()
     }
 
-    companion object{
-        const val GAME_SPEED = 1000 //10 seconds for word to fall
+    override fun onResume() {
+        super.onResume()
+        toggleStatusBarColour()
+    }
+
+    private fun toggleStatusBarColour() {
+        context?.let {
+            val color = ContextCompat.getColor(it, R.color.langDropPurple)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                activity?.window?.let { window ->
+                    window.statusBarColor = color
+                }
+            }
+        }
+    }
+
+    companion object {
+        const val GAME_SPEED = 10000 //10 seconds for word to fall
+        const val PLAYER_MAX_LIVES = 3 //Standard health or life count
+        const val HEART_SIZE_PIXELS = 100
     }
 }

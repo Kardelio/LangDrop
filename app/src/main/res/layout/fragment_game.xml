@@ -12,49 +12,69 @@
         android:id="@+id/player_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/static_text"
         tools:text="SCORE" />
 
-    <TextView
-        android:id="@+id/player_lives"
+    <LinearLayout
+        android:id="@+id/lives_area"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/player_score"
-        tools:text="LIVES" />
+        android:layout_margin="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/static_text" />
 
     <TextView
         android:id="@+id/falling_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="FALLING WORD" />
 
     <TextView
         android:id="@+id/static_text"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/static_word_background"
+        android:gravity="center_horizontal"
+        android:padding="8dp"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="STATIC WORD" />
 
-    <Button
+    <ImageButton
         android:id="@+id/correct_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:text="Correct"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/button_background"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_thumb_up"
+        android:tint="@color/landDropGreen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
+    <ImageButton
         android:id="@+id/wrong_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:text="Wrong"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/button_background"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_thumb_down"
+        android:tint="@color/landDropRed"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -66,15 +86,29 @@
         android:elevation="2dp"
         android:gravity="center|center_horizontal"
         android:orientation="vertical"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <TextView
+            android:id="@+id/start_screen_info_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:gravity="center_horizontal"
+            android:paddingHorizontal="8dp"
+            android:text="@string/game_info_text"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+
         <Button
             android:id="@+id/start_screen_play_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/play_button_background"
             android:padding="20dp"
             android:text="start"
             android:textSize="32sp" />
@@ -83,6 +117,8 @@
             android:id="@+id/start_screen_close_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:background="@drawable/close_button_background"
             android:padding="20dp"
             android:text="close"
             android:textSize="32sp" />
@@ -106,24 +142,25 @@
             android:id="@+id/over_screen_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="32sp"
             android:layout_marginBottom="12dp"
+            android:text="@string/you_scored"
             android:textColor="@android:color/white"
-            android:text="You scored:"/>
+            android:textSize="32sp" />
 
         <TextView
             android:id="@+id/over_screen_score_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="32sp"
             android:layout_marginBottom="12dp"
-            android:textColor="@android:color/white"
-            tools:text="100"/>
+            android:textColor="@color/landDropYellow"
+            android:textSize="32sp"
+            tools:text="100" />
 
         <Button
             android:id="@+id/over_screen_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button_background"
             android:padding="20dp"
             android:text="Done"
             android:textSize="32sp" />

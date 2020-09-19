@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">LangDrop</string>
+
+    <string name="game_info_text">
+        Welcome to Lang Drop!\n
+        You will two words in two different languages!
+        Use the buttons to decide if you think the words match and earn points when you get it right!
+        Be careful though, if you get it wrong you will lose a life!
+        The game will end when you lose all your lives!\n
+        Good Luck!
+    </string>
+    <string name="you_scored">You scored:</string>
 </resources>

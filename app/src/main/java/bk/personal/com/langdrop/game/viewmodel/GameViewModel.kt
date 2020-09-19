@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import bk.personal.com.langdrop.game.repository.IWordRepository
+import bk.personal.com.langdrop.game.view.GameFragment
 import bk.personal.com.langdrop.model.GameWordPair
 
 sealed class GameState {
@@ -26,14 +27,14 @@ class GameViewModel @ViewModelInject constructor(private val repo: IWordReposito
 
     private val _lives: MutableLiveData<Int> = MutableLiveData()
     val lives: LiveData<Int> = _lives
-    private var currentLives = 3
+    private var currentLives = GameFragment.PLAYER_MAX_LIVES
 
     init {
         reloadGame()
     }
 
     fun startGame() {
-        currentLives = 3
+        currentLives = GameFragment.PLAYER_MAX_LIVES
         currentScore = 0
         _lives.postValue(currentLives)
         _score.postValue(currentScore)

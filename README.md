@@ -142,3 +142,9 @@ tests to go along witht the UI. I also need to do the Game over screen.
 Simply added into the motion scene the 'Game Over' screen that transitions in when the player
 loses and allows them to right right back to the start to play the game all over again. Im going
 to make the UI look nice now then instrumentation tests.
+
+#### Commit 6
+This is the commit that I tried to make everything look just a little bit better.
+I added vector drawables, background, custom colours and text to screens.
+This commit was simply focused on making all elements of the game look better, there was no game logic
+changed or added here. Now onto UI Tests...
