@@ -8,14 +8,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.constraintlayout.motion.widget.MotionLayout
-import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import bk.personal.com.langdrop.R
+import bk.personal.com.langdrop.game.viewmodel.GameState
 import bk.personal.com.langdrop.game.viewmodel.GameViewModel
-import bk.personal.com.langdrop.model.Word
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import bk.personal.com.langdrop.model.GameWordPair
+import bk.personal.com.langdrop.utils.TransitionHelper
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,9 +23,12 @@ class GameFragment : Fragment() {
 
     private val viewmodel: GameViewModel by viewModels()
 
+    private lateinit var startButton: Button
+    private lateinit var closeButton: Button
+    private lateinit var correctButton: Button
+    private lateinit var wrongButton: Button
+
     private lateinit var tv: TextView
-    private lateinit var b: Button
-    private lateinit var bs: Button
     private lateinit var m: MotionLayout
 
     override fun onCreateView(
@@ -36,44 +39,85 @@ class GameFragment : Fragment() {
         val v = inflater.inflate(R.layout.fragment_game, container, false)
         tv = v.findViewById<TextView>(R.id.tv)
         m = v.findViewById(R.id.ml)
-        b = v.findViewById<Button>(R.id.button2)
-        bs = v.findViewById(R.id.bb)
+
+        startButton = v.findViewById(R.id.start_screen_play_button)
+        closeButton = v.findViewById(R.id.start_screen_close_button)
+        wrongButton = v.findViewById(R.id.wrong_button)
+        correctButton = v.findViewById(R.id.correct_button)
         return v
+    }
+
+    private val wordDropTransitionListerner = TransitionHelper {
+        viewmodel.submittedAnswer(null)
+    }
+
+    private val playScreenTransitionListerner = TransitionHelper {
+        viewmodel.startGame()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //TODO observe things
-        m.addTransitionListener(object : MotionLayout.TransitionListener {
-            override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
-            }
+        startButton.setOnClickListener {
+            m.setTransitionDuration(500)
+            m.addTransitionListener(playScreenTransitionListerner)
+            m.transitionToState(R.id.preStartEnd)
+        }
 
-            override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
-            }
+        closeButton.setOnClickListener {
+            closeApp()
+        }
 
-            override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
-                Log.d("BK", "DONEEEE")
-            }
+        correctButton.setOnClickListener {
+            viewmodel.submittedAnswer(true)
+        }
 
-            override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
-            }
+        wrongButton.setOnClickListener {
+            viewmodel.submittedAnswer(false)
+        }
+
+        viewmodel.gameState.observe(viewLifecycleOwner, Observer {
+            renderGameState(it)
         })
-//        m.transitionToEnd()
-//        m.progress = 0.5f
-        m.setTransitionDuration(10000)
-        b.setOnClickListener {
-            Log.d("BK", "Stop!")
-            m.setProgress(0f, 0f)
-        }
-        bs.setOnClickListener {
-            m.transitionToEnd()
-        }
-        viewmodel.test()
-//        close()
     }
 
-    fun close(){
+    private fun renderGameState(gameState: GameState) {
+        when (gameState) {
+            is GameState.Pre -> {
+                loadPreGameView()
+            }
+            is GameState.Over -> {
+                loadPostGameView()
+            }
+            is GameState.Active -> {
+                loadActiveGameView(gameState)
+            }
+        }
+    }
+
+    private fun loadActiveGameView(gameState: GameState.Active) {
+        m.setTransition(R.id.start, R.id.end)
+        m.removeTransitionListener(playScreenTransitionListerner)
+        m.removeTransitionListener(wordDropTransitionListerner)
+        m.addTransitionListener(wordDropTransitionListerner)
+        m.setTransitionDuration(2000)
+
+        loadActiveWordPair(gameState.activePair)
+        m.transitionToEnd()
+    }
+
+    private fun loadPreGameView() {
+
+    }
+
+    private fun loadPostGameView() {
+        Log.d("BENK","Game Over!")
+    }
+
+    private fun loadActiveWordPair(wordPair: GameWordPair) {
+        tv.text = wordPair.eng
+    }
+
+    fun closeApp() {
         requireActivity().finish()
     }
-
 }

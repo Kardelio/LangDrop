@@ -2,6 +2,7 @@ package bk.personal.com.langdrop.game.repository
 
 import android.util.Log
 import bk.personal.com.langdrop.R
+import bk.personal.com.langdrop.model.GameWordPair
 import bk.personal.com.langdrop.model.Word
 import bk.personal.com.langdrop.utils.IRandomNumberGenerator
 import com.google.gson.Gson
@@ -10,25 +11,37 @@ import javax.inject.Inject
 
 interface IWordRepository {
     fun getAllWords(): List<Word>
+    fun getRandomWordPair(): GameWordPair?
 }
 
 class WordRepository @Inject constructor(
     private val wordJson: String,
     private val gson: Gson,
-    randNumGen: IRandomNumberGenerator
+    private val randomGenerator: IRandomNumberGenerator
 ) : IWordRepository {
 
-    init {
-        read()
+    private var wordList: List<Word>? = null
 
-//        val ans = randNumGen.generateRandomNumberInclusive(5,8)
-//        Log.d("BENK","${ans.toString()}")
+    init {
+        convertJsonStringToWordObjects()
     }
 
-    fun read() {
+    private fun convertJsonStringToWordObjects() {
         val turnsType = object : TypeToken<List<Word>>() {}.type
         val words = gson.fromJson<List<Word>>(wordJson, turnsType)
-        Log.d("BENK", "${words.size}")
+        wordList = words
+    }
+
+    override fun getRandomWordPair(): GameWordPair? {
+        wordList?.let {
+            val w = it[randomGenerator.generateRandomNumberInclusive(0, (it.size - 1))]
+            return if (randomGenerator.shouldOtherWordBeCorrect()) {
+                GameWordPair(w.text_eng, w.text_spa, true)
+            } else {
+                val falseWord = it[randomGenerator.generateRandomNumberInclusive(0, (it.size - 1))]
+                GameWordPair(w.text_eng, falseWord.text_spa, false)
+            }
+        } ?: return null
     }
 
     override fun getAllWords(): List<Word> {

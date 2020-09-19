@@ -85,4 +85,28 @@ For the Initial commit I have done the following:
 * I have written this README file
 
 #### Commit 2
-TODO
+For the second commit I have been working on ensuring that the actual game mechanics work.
+I have been testing the Motionlayout for the "falling word" solution and it is a great solution.
+It is very clean and concise and because I can fully control the motionlayout in code and also
+make nice animations very easily this is a great choice for the actual falling word mechanic.
+
+I have setup the gameFragment UI in a very basic way, I will swing back to this UI to make it
+look better at the end if time permits. However more importantly I setup the GameViewModel, which
+will be responsible for the logic of the UI state. I have set up a GameState livedata that has currently
+3 states: `Active` for when the player is playing the game, `Over` for when the game is over and the player has
+run out of lives and `Pre` which is essentially the state before the game starts for the first time
+where the user chooses to play the game or exit the app. The relationship and transition between
+these UI states based on User interaction and running out of lives works and works well.
+
+I added a "pre" game menu screen (sort of) into the motionlayout where the user can choose to play
+the game or exit the app. Clicking the play button begins the game and the words to drop.
+
+I have setup very quickly some logic for the Word Repo, which reads in the JSON file to return to me
+a random word pairing, with a arbitery 50/50 chance the user will see the `correct` word pairing. I have
+also passed the "answer" if the pairing is right or wrong down with the Word pair object so the VM can
+quickly find out if the words fit together.
+
+I will now continue on and add the scores data and lives data to the UI. And then ensure that the user
+"Correct" and "Wrong" buttons are all wired up in order for the game to be playable. I will then start to
+write some tests for the VM, Repo and Fragment passing in mocked data to ensure the game logic works as
+it should and build confidence when I continue to change the project...
