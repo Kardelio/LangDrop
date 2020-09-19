@@ -29,7 +29,7 @@ class GameViewModel @ViewModelInject constructor(private val repo: IWordReposito
     private var currentLives = 3
 
     init {
-        _gameState.postValue(GameState.Pre)
+        reloadGame()
     }
 
     fun startGame() {
@@ -58,6 +58,10 @@ class GameViewModel @ViewModelInject constructor(private val repo: IWordReposito
         } else {
             _gameState.postValue(GameState.Over)
         }
+    }
+
+    fun reloadGame(){
+        _gameState.postValue(GameState.Pre)
     }
 
     private fun nextWordPair() {

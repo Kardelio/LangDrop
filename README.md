@@ -137,3 +137,8 @@ capturing the values within livedata objects and stubbing mocked data object (wh
 I am not yet finished writing all the test cases and will continue to write more tests as I continue, however
 for now I want to go back to the UI and make the appearance nicer to look at and then write some Instrumentation
 tests to go along witht the UI. I also need to do the Game over screen.
+
+#### Commit 5
+Simply added into the motion scene the 'Game Over' screen that transitions in when the player
+loses and allows them to right right back to the start to play the game all over again. Im going
+to make the UI look nice now then instrumentation tests.
