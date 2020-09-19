@@ -110,3 +110,15 @@ I will now continue on and add the scores data and lives data to the UI. And the
 "Correct" and "Wrong" buttons are all wired up in order for the game to be playable. I will then start to
 write some tests for the VM, Repo and Fragment passing in mocked data to ensure the game logic works as
 it should and build confidence when I continue to change the project...
+
+#### Commit 3
+This is a very simple commit. I have done the following:
+
+* Updated the game fragment UI to include score and lives (number form atm)
+* Made sure the user can use the correct and wrong buttons and the data is sent to VM
+* score and lives are updated depending on the game logic now
+* User can hit a game over state when the game is over due to lack of lives
+
+So everything in the game is working. However now it just looks gross as there has been no
+love in terms of UI or UX. Also I need to write some tests for the logic. I will write these
+tests now before I make the game itself look and feel better.

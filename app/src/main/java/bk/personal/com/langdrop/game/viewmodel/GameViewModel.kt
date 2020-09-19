@@ -9,12 +9,12 @@ import bk.personal.com.langdrop.game.repository.IWordRepository
 import bk.personal.com.langdrop.model.GameWordPair
 
 sealed class GameState {
-    data class Active(val activePair: GameWordPair): GameState()
-    object Pre: GameState()
-    object Over: GameState()
+    data class Active(val activePair: GameWordPair) : GameState()
+    object Pre : GameState()
+    object Over : GameState()
 }
 
-class GameViewModel @ViewModelInject constructor(private val repo: IWordRepository): ViewModel(){
+class GameViewModel @ViewModelInject constructor(private val repo: IWordRepository) : ViewModel() {
 
     private val _gameState: MutableLiveData<GameState> = MutableLiveData()
     val gameState: LiveData<GameState> = _gameState
@@ -22,47 +22,45 @@ class GameViewModel @ViewModelInject constructor(private val repo: IWordReposito
 
     private val _score: MutableLiveData<Int> = MutableLiveData()
     val score: LiveData<Int> = _score
+    var currentScore = 0
 
     private val _lives: MutableLiveData<Int> = MutableLiveData()
     val lives: LiveData<Int> = _lives
     var currentLives = 3
 
     init {
-        Log.d("BENK","Loaded vm")
         _gameState.postValue(GameState.Pre)
-//        repo.getRandomWordPair()
     }
 
-    fun startGame(){
+    fun startGame() {
         _lives.postValue(currentLives)
+        _score.postValue(currentScore)
         nextWordPair()
     }
 
-    fun nextWordPair(){
+    fun nextWordPair() {
         currentWordPair = repo.getRandomWordPair()
         currentWordPair?.let {
             _gameState.postValue(GameState.Active(it))
         }
     }
 
-    fun loseALife(){
+    fun loseALife() {
         currentLives--
         _lives.postValue(currentLives)
     }
 
-
-    fun gainAPoint(){
-
+    fun gainAPoint() {
+        currentScore++
+        _score.postValue(currentScore)
     }
 
-    fun submittedAnswer(isCorrect: Boolean?){
-        if(isCorrect == null){
-            //failed word hit the floow
-            //TODO lose life
+    fun submittedAnswer(isCorrect: Boolean?) {
+        if (isCorrect == null) {
             loseALife()
         } else {
             currentWordPair?.let {
-                if(isCorrect == it.correct){
+                if (isCorrect == it.correct) {
                     gainAPoint()
                 } else {
                     loseALife()
@@ -70,16 +68,10 @@ class GameViewModel @ViewModelInject constructor(private val repo: IWordReposito
             }
         }
 
-        if(currentLives > 0){
+        if (currentLives > 0) {
             nextWordPair()
         } else {
             _gameState.postValue(GameState.Over)
         }
     }
-
-    fun test(){
-        Log.d("BENK","test")
-
-    }
-
 }

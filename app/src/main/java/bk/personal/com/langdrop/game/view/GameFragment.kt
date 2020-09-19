@@ -28,8 +28,11 @@ class GameFragment : Fragment() {
     private lateinit var correctButton: Button
     private lateinit var wrongButton: Button
 
-    private lateinit var tv: TextView
-    private lateinit var m: MotionLayout
+    private lateinit var fallingText: TextView
+    private lateinit var staticText: TextView
+    private lateinit var playerScore: TextView
+    private lateinit var playerLives: TextView
+    private lateinit var motionLayout: MotionLayout
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,13 +40,15 @@ class GameFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val v = inflater.inflate(R.layout.fragment_game, container, false)
-        tv = v.findViewById<TextView>(R.id.tv)
-        m = v.findViewById(R.id.ml)
-
         startButton = v.findViewById(R.id.start_screen_play_button)
         closeButton = v.findViewById(R.id.start_screen_close_button)
         wrongButton = v.findViewById(R.id.wrong_button)
         correctButton = v.findViewById(R.id.correct_button)
+        fallingText = v.findViewById(R.id.falling_text)
+        staticText = v.findViewById(R.id.static_text)
+        playerLives = v.findViewById(R.id.player_lives)
+        playerScore = v.findViewById(R.id.player_score)
+        motionLayout = v.findViewById(R.id.game_motion_layout)
         return v
     }
 
@@ -58,9 +63,9 @@ class GameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         startButton.setOnClickListener {
-            m.setTransitionDuration(500)
-            m.addTransitionListener(playScreenTransitionListerner)
-            m.transitionToState(R.id.preStartEnd)
+            motionLayout.setTransitionDuration(500)
+            motionLayout.addTransitionListener(playScreenTransitionListerner)
+            motionLayout.transitionToState(R.id.preStartEnd)
         }
 
         closeButton.setOnClickListener {
@@ -77,6 +82,14 @@ class GameFragment : Fragment() {
 
         viewmodel.gameState.observe(viewLifecycleOwner, Observer {
             renderGameState(it)
+        })
+
+        viewmodel.score.observe(viewLifecycleOwner, Observer {
+            playerScore.text = "$it"
+        })
+
+        viewmodel.lives.observe(viewLifecycleOwner, Observer {
+            playerLives.text = "$it"
         })
     }
 
@@ -95,14 +108,14 @@ class GameFragment : Fragment() {
     }
 
     private fun loadActiveGameView(gameState: GameState.Active) {
-        m.setTransition(R.id.start, R.id.end)
-        m.removeTransitionListener(playScreenTransitionListerner)
-        m.removeTransitionListener(wordDropTransitionListerner)
-        m.addTransitionListener(wordDropTransitionListerner)
-        m.setTransitionDuration(2000)
+        motionLayout.setTransition(R.id.start, R.id.end)
+        motionLayout.removeTransitionListener(playScreenTransitionListerner)
+        motionLayout.removeTransitionListener(wordDropTransitionListerner)
+        motionLayout.addTransitionListener(wordDropTransitionListerner)
+        motionLayout.setTransitionDuration(GAME_SPEED)
 
         loadActiveWordPair(gameState.activePair)
-        m.transitionToEnd()
+        motionLayout.transitionToEnd()
     }
 
     private fun loadPreGameView() {
@@ -114,10 +127,15 @@ class GameFragment : Fragment() {
     }
 
     private fun loadActiveWordPair(wordPair: GameWordPair) {
-        tv.text = wordPair.eng
+        fallingText.text = wordPair.eng
+        staticText.text = wordPair.spa
     }
 
-    fun closeApp() {
+    private fun closeApp() {
         requireActivity().finish()
+    }
+
+    companion object{
+        const val GAME_SPEED = 10000 //10 seconds for word to fall
     }
 }
