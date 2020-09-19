@@ -122,3 +122,18 @@ This is a very simple commit. I have done the following:
 So everything in the game is working. However now it just looks gross as there has been no
 love in terms of UI or UX. Also I need to write some tests for the logic. I will write these
 tests now before I make the game itself look and feel better.
+
+#### Commit 4
+I have created unit tests for the GameViewModel and the WordRepository.
+Both are very simple and test some of the important app logic paths to ensure that the results
+are as expected based on mocked input.
+
+As part of this commit I have added the mockito dependency and also built a sharedTest folder
+that will contain files that are useful for both the unit tests and the instrumentation tests
+this sharedTest folder has been included in the build.gradle source sets and as of now contains
+one utility file that contains several useful extension functions for when it comes to writing mocks,
+capturing the values within livedata objects and stubbing mocked data object (whenever).
+
+I am not yet finished writing all the test cases and will continue to write more tests as I continue, however
+for now I want to go back to the UI and make the appearance nicer to look at and then write some Instrumentation
+tests to go along witht the UI. I also need to do the Game over screen.

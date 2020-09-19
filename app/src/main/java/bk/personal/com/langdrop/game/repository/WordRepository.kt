@@ -1,7 +1,5 @@
 package bk.personal.com.langdrop.game.repository
 
-import android.util.Log
-import bk.personal.com.langdrop.R
 import bk.personal.com.langdrop.model.GameWordPair
 import bk.personal.com.langdrop.model.Word
 import bk.personal.com.langdrop.utils.IRandomNumberGenerator
@@ -10,7 +8,6 @@ import com.google.gson.reflect.TypeToken
 import javax.inject.Inject
 
 interface IWordRepository {
-    fun getAllWords(): List<Word>
     fun getRandomWordPair(): GameWordPair?
 }
 
@@ -42,9 +39,5 @@ class WordRepository @Inject constructor(
                 GameWordPair(w.text_eng, falseWord.text_spa, false)
             }
         } ?: return null
-    }
-
-    override fun getAllWords(): List<Word> {
-        return emptyList()
     }
 }

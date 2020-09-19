@@ -15,7 +15,7 @@ import bk.personal.com.langdrop.R
 import bk.personal.com.langdrop.game.viewmodel.GameState
 import bk.personal.com.langdrop.game.viewmodel.GameViewModel
 import bk.personal.com.langdrop.model.GameWordPair
-import bk.personal.com.langdrop.utils.TransitionHelper
+import bk.personal.com.langdrop.utils.transitionHelper
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -52,11 +52,11 @@ class GameFragment : Fragment() {
         return v
     }
 
-    private val wordDropTransitionListerner = TransitionHelper {
+    private val wordDropTransitionListerner = transitionHelper {
         viewmodel.submittedAnswer(null)
     }
 
-    private val playScreenTransitionListerner = TransitionHelper {
+    private val playScreenTransitionListerner = transitionHelper {
         viewmodel.startGame()
     }
 

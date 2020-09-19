@@ -18,41 +18,26 @@ class GameViewModel @ViewModelInject constructor(private val repo: IWordReposito
 
     private val _gameState: MutableLiveData<GameState> = MutableLiveData()
     val gameState: LiveData<GameState> = _gameState
-    var currentWordPair: GameWordPair? = null
+    private var currentWordPair: GameWordPair? = null
 
     private val _score: MutableLiveData<Int> = MutableLiveData()
     val score: LiveData<Int> = _score
-    var currentScore = 0
+    private var currentScore = 0
 
     private val _lives: MutableLiveData<Int> = MutableLiveData()
     val lives: LiveData<Int> = _lives
-    var currentLives = 3
+    private var currentLives = 3
 
     init {
         _gameState.postValue(GameState.Pre)
     }
 
     fun startGame() {
+        currentLives = 3
+        currentScore = 0
         _lives.postValue(currentLives)
         _score.postValue(currentScore)
         nextWordPair()
-    }
-
-    fun nextWordPair() {
-        currentWordPair = repo.getRandomWordPair()
-        currentWordPair?.let {
-            _gameState.postValue(GameState.Active(it))
-        }
-    }
-
-    fun loseALife() {
-        currentLives--
-        _lives.postValue(currentLives)
-    }
-
-    fun gainAPoint() {
-        currentScore++
-        _score.postValue(currentScore)
     }
 
     fun submittedAnswer(isCorrect: Boolean?) {
@@ -73,5 +58,24 @@ class GameViewModel @ViewModelInject constructor(private val repo: IWordReposito
         } else {
             _gameState.postValue(GameState.Over)
         }
+    }
+
+    private fun nextWordPair() {
+        currentWordPair = repo.getRandomWordPair()
+        currentWordPair?.let {
+            _gameState.postValue(GameState.Active(it))
+        }
+    }
+
+    private fun loseALife() {
+        if (currentLives > 0) {
+            currentLives--
+            _lives.postValue(currentLives)
+        }
+    }
+
+    private fun gainAPoint() {
+        currentScore++
+        _score.postValue(currentScore)
     }
 }

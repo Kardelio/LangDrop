@@ -1,12 +1,8 @@
 package bk.personal.com.langdrop.utils
 
-import android.animation.Animator
 import androidx.constraintlayout.motion.widget.MotionLayout
 
-
-
-
-inline fun TransitionHelper(crossinline continuation: () -> Unit): MotionLayout.TransitionListener{
+inline fun transitionHelper(crossinline continuation: () -> Unit): MotionLayout.TransitionListener{
     val a = object : MotionLayout.TransitionListener {
         override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
         }
