@@ -10,9 +10,11 @@ above static word before the word hits the bottom of the screen!
 The player will have X amount of lives and will lose one on an incorrect answer or
 if the falling word hits the deck before an answer is submitted!
 
-### TODO
-* Screenshot here...
-* Logo here? (NTH)
+<div>
+    <img src="screen_pre.png" width="200" title="hover text">
+    <img src="screen_active.png" width="200" title="hover text">
+    <img src="screen_over.png" width="200" title="hover text">
+</div>
 
 ----
 
@@ -148,3 +150,7 @@ This is the commit that I tried to make everything look just a little bit better
 I added vector drawables, background, custom colours and text to screens.
 This commit was simply focused on making all elements of the game look better, there was no game logic
 changed or added here. Now onto UI Tests...
+
+#### Commit 7
+Updated this readme with images, hopefully they display on github correctly. I may need to use
+the http request for each instead.
