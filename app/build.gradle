@@ -75,6 +75,9 @@ dependencies {
     //Useful for viewmodels() func
     implementation "androidx.fragment:fragment-ktx:1.2.5"
 
+    //No Retrofit or Room needed in this project...
+    //How weird!
+
     //Hilt
     def hilt_version = "2.28.3-alpha"
     implementation "com.google.dagger:hilt-android:$hilt_version"

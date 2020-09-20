@@ -78,24 +78,29 @@ class GameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //Start button to launch the game
         startButton.setOnClickListener {
             motionLayout.setTransitionDuration(500)
             motionLayout.addTransitionListener(menuScreenToActiveTransitionListerner)
             motionLayout.transitionToState(R.id.preStartEnd)
         }
 
+        //Close button to close the app
         closeButton.setOnClickListener {
             closeApp()
         }
 
+        //Player says the word match
         correctButton.setOnClickListener {
             viewmodel.submittedAnswer(true)
         }
 
+        //Player says the words dont match
         wrongButton.setOnClickListener {
             viewmodel.submittedAnswer(false)
         }
 
+        //Button to reset the game and take player back to start menu
         overButton.setOnClickListener {
             viewmodel.reloadGame()
         }

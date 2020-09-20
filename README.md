@@ -7,7 +7,7 @@ additional "Falling" word that slowly plumbits from the top for the screen to th
 The player must try to decide if the falling word is an accurate translation of the
 above static word before the word hits the bottom of the screen!
 
-The player will have X amount of lives and will lose one on an incorrect answer or
+The player will have 3 lives and will lose one on an incorrect answer or
 if the falling word hits the deck before an answer is submitted!
 
 <div>
@@ -177,5 +177,69 @@ Whoops images on GH broke... classic!
 #### Commit 11
 And now those images are massive lets make them smaller...
 
-### If I had more time...
-TODO
+#### Commit 12
+I think this will be the final commit of the project. I will make sure to update the
+`Final Thoughts` section below detailing the time I took and the things that I would
+do if i continued to work on this in the future. There is plenty that could still be done on this
+small app, but I want to make sure that I stick to a time limit and I will call it "Done" for
+now within the time frame.
+I have manually tested the game and it works well!
+I have run the entire test suite and all tests pass, so I am happy!
+
+Please read the seciton below for my closing thoughts and more detail...
+
+----
+
+### Final Thoughts...
+
+##### Time Taken
+This small app took overall in total about 6 hours from conception to the final commit (12).
+
+I originally started with about 20 or 30 minutes or so to plan my approach, this approach was
+adapted as the time went on.
+
+I then took the majority of the time to implement the actual game fragment screen and write the tests.
+I additionally used an hour or so to make the UI look nicer.
+And I definitly used maybe 30 minutes in total writing up this README file.
+
+##### Decisions
+I decided to think about a cool interesting way to use "new libraries and approaches" for the
+falling word mechanic and I landed on using the awesome motionlayout for the falling animation
+as I was able to not only make it fall and control it FULLY in the code, but also add visually
+pleasing arcs to the fall to make it look like it was swayying all in just a few minutes with very
+few lines of code into the motion scene XML. The motionlayout was incredibly easy to control
+and I wanted to make life easy for myself within the time limit in order to constraint
+on creating the architecture of the app and make sure that the tests were written well.
+
+I also used Hilt for the DI instead of the "Standard" Dagger 2. Hilt is relatively new and is a
+brilliant recommendation and creation from Google in order to address Dependency Injection. I
+chose this approach simply because of the speed it gave me and ease to implement. There were
+some issue when it came to mocking the viewmodel in the fragment UI tests, however I have worked
+on side projects and have solved this issue by overriding the viewmodels delegate in order to replace
+the viewmodel when the fragment is launched.
+
+##### If I had more time...
+I would do the following changes if time permitted:
+* Change the `pre` and `over` screen views to be their own fragments. This is how
+I originally planned for them to be but as I progressed I decided to utilize the motionlayout
+to quickly add the screens as overlay layouts to the game, thus allowing me to easily
+transition between them using the power of the motionlayout. However the motionlayout now
+is overcrowded and I would simply remove these additional screen to their own fragments
+as originally planned. This would have address the bug that exists that the player can
+currently click "through" the menu screen to the tick or cross button. This is a known bug
+and this todo would remove it.
+* Add in a `Highest score` or score tracking system. If i was just tracking the best score
+I would use the shared preferences and display the best score on the game over screen. If I
+was tracking all played games I would save the games with the time they were played, score and
+remaining lives in a Room database and add an additional score viewer screen, to display all
+games in a recyclerview.
+* I would ask a designer to give me better looking designs...
+* I would have written a custom view class to handle the player lives as I was not happy with
+my "programmatically-add-views-to-the-linearlayout" approach and feel that could have been made
+better. I would have written a custom view component and overriden the onDraw method to do the
+hearts instead. However this current version was a very quick and easy implementation for time!
+* I would have added an additional controls screen, in order for the player to control the
+falling word speed, in a sort of "choose-your-difficulty" kind of situation. As the speed of the
+fall was completely controllable so why not give the player the "hard" option and speed it up if
+chosen. however this was very much a nice-to-have addition.
+
