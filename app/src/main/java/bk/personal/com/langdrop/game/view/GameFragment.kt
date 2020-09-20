@@ -155,7 +155,7 @@ class GameFragment : Fragment() {
         motionLayout.removeTransitionListener(menuScreenToActiveTransitionListerner)
         motionLayout.removeTransitionListener(wordDropTransitionListerner)
         motionLayout.addTransitionListener(wordDropTransitionListerner)
-        motionLayout.setTransitionDuration(GAME_SPEED)
+        motionLayout.setTransitionDuration(viewmodel.gameSpeed)
 
         loadActiveWordPair(gameState.activePair)
         motionLayout.transitionToEnd()
@@ -201,7 +201,6 @@ class GameFragment : Fragment() {
     }
 
     companion object {
-        const val GAME_SPEED = 10000 //10 seconds for word to fall
         const val PLAYER_MAX_LIVES = 3 //Standard health or life count
         const val HEART_SIZE_PIXELS = 100
     }

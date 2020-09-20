@@ -9,12 +9,11 @@ above static word before the word hits the bottom of the screen!
 
 The player will have X amount of lives and will lose one on an incorrect answer or
 if the falling word hits the deck before an answer is submitted!
+git remote add origin https://github.com/Kardelio/LangDrop.git
 
-<div>
-    <img src="screen_pre.png" width="200" title="hover text">
-    <img src="screen_active.png" width="200" title="hover text">
-    <img src="screen_over.png" width="200" title="hover text">
-</div>
+![Pre Game Screen](https://github.com/Kardelio/LangDrop/blob/master/pre.jpg?raw=true)
+![Active Game Screen](https://github.com/Kardelio/LangDrop/blob/master/active.jpg?raw=true)
+![Over Game Screen](https://github.com/Kardelio/LangDrop/blob/master/over.jpg?raw=true)
 
 ----
 
@@ -164,6 +163,12 @@ List Below:
 * Changed the UI abit to make it look better
 * Added swaying motion in motion layout with falling word. Nice
 
+#### Commit 9
+The Android Fragment UI test have been added. I have added in a bunch of useful functions (including matchers) and
+have written the UI tests to quickly and through an automated method see if the UI components act
+as they should. I also added a few more tests to the viewmodel and move the speed control of the falling
+text to be within the viewmodel so it could be mocked at the UI test level.
+I have added some screen shots above and will now push to github in order to test the urls work.
 
 ### If I had more time...
 TODO

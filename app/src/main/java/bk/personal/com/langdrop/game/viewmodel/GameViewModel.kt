@@ -19,6 +19,9 @@ sealed class GameState {
 @OpenClassOnDebug
 class GameViewModel @ViewModelInject constructor(private val repo: IWordRepository) : ViewModel() {
 
+    //Game Speed - falling words take 10 seconds to drop
+    val gameSpeed = 10000
+
     private val _gameState: MutableLiveData<GameState> = MutableLiveData()
     val gameState: LiveData<GameState> = _gameState
     private var currentWordPair: GameWordPair? = null

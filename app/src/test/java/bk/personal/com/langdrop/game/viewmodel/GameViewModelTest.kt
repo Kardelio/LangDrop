@@ -120,4 +120,15 @@ class GameViewModelTest {
         assertFalse(gs.activePair.correct)
     }
 
+    @Test
+    fun `test user loses all lives and game over triggers`(){
+        whenever(repo.getRandomWordPair()).thenReturn(randomWordPairRight)
+        viewmodel.startGame()
+        viewmodel.submittedAnswer(false)
+        viewmodel.submittedAnswer(false)
+        viewmodel.submittedAnswer(false)
+        //Pre, Active, Active, Active, Over
+        verify(gameStateObserver, times(5)).onChanged(capture(gameStateCaptor))
+        assertTrue(gameStateCaptor.allValues.last() is GameState.Over)
+    }
 }

@@ -13,9 +13,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="8dp"
+        android:textColor="@color/landDropYellowDark"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:textColor="@color/landDropYellowDark"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/static_text"
         tools:text="SCORE" />
@@ -60,9 +60,9 @@
         android:layout_width="@dimen/button_size"
         android:layout_height="@dimen/button_size"
         android:layout_margin="20dp"
+        android:background="@null"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_right"
-        android:background="@null"
         android:tint="@color/right_pressed"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -94,10 +94,18 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="@string/title"
+            android:textColor="@android:color/white"
+            android:textSize="48sp" />
+
+        <TextView
             android:id="@+id/start_screen_info_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
+            android:layout_marginBottom="20dp"
             android:gravity="center_horizontal"
             android:paddingHorizontal="8dp"
             android:text="@string/game_info_text"
@@ -118,10 +126,10 @@
             android:id="@+id/start_screen_close_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
             android:background="@drawable/close_button_background"
             android:padding="20dp"
             android:text="close"
+            android:textColor="@android:color/white"
             android:textSize="32sp" />
     </LinearLayout>
 
