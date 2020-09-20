@@ -10,9 +10,11 @@ above static word before the word hits the bottom of the screen!
 The player will have X amount of lives and will lose one on an incorrect answer or
 if the falling word hits the deck before an answer is submitted!
 
-![Pre Game Screen](https://github.com/Kardelio/LangDrop/blob/master/pre.png?raw=true)
-![Active Game Screen](https://github.com/Kardelio/LangDrop/blob/master/active.png?raw=true)
-![Over Game Screen](https://github.com/Kardelio/LangDrop/blob/master/over.png?raw=true)
+<div>
+    <img src="https://github.com/Kardelio/LangDrop/blob/master/pre.png?raw=true" width="200" />
+    <img src="https://github.com/Kardelio/LangDrop/blob/master/active.png?raw=true" width="200"/>
+    <img src="https://github.com/Kardelio/LangDrop/blob/master/over.png?raw=true" width="200"/>
+</div>
 
 ----
 
@@ -171,6 +173,9 @@ I have added some screen shots above and will now push to github in order to tes
 
 #### Commit 10
 Whoops images on GH broke... classic!
+
+#### Commit 11
+And now those images are massive lets make them smaller...
 
 ### If I had more time...
 TODO
