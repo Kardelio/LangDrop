@@ -9,11 +9,10 @@ above static word before the word hits the bottom of the screen!
 
 The player will have X amount of lives and will lose one on an incorrect answer or
 if the falling word hits the deck before an answer is submitted!
-git remote add origin https://github.com/Kardelio/LangDrop.git
 
-![Pre Game Screen](https://github.com/Kardelio/LangDrop/blob/master/pre.jpg?raw=true)
-![Active Game Screen](https://github.com/Kardelio/LangDrop/blob/master/active.jpg?raw=true)
-![Over Game Screen](https://github.com/Kardelio/LangDrop/blob/master/over.jpg?raw=true)
+![Pre Game Screen](https://github.com/Kardelio/LangDrop/blob/master/pre.png?raw=true)
+![Active Game Screen](https://github.com/Kardelio/LangDrop/blob/master/active.png?raw=true)
+![Over Game Screen](https://github.com/Kardelio/LangDrop/blob/master/over.png?raw=true)
 
 ----
 
@@ -169,6 +168,9 @@ have written the UI tests to quickly and through an automated method see if the 
 as they should. I also added a few more tests to the viewmodel and move the speed control of the falling
 text to be within the viewmodel so it could be mocked at the UI test level.
 I have added some screen shots above and will now push to github in order to test the urls work.
+
+#### Commit 10
+Whoops images on GH broke... classic!
 
 ### If I had more time...
 TODO
