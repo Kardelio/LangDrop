@@ -15,6 +15,7 @@
         android:padding="8dp"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:textColor="@color/landDropYellowDark"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/static_text"
         tools:text="SCORE" />
@@ -47,7 +48,7 @@
         android:gravity="center_horizontal"
         android:padding="8dp"
         android:textColor="@android:color/white"
-        android:textSize="20sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,25 +57,25 @@
 
     <ImageButton
         android:id="@+id/correct_button"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="@dimen/button_size"
+        android:layout_height="@dimen/button_size"
         android:layout_margin="20dp"
-        android:background="@drawable/button_background"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_thumb_up"
-        android:tint="@color/landDropGreen"
+        android:src="@drawable/ic_right"
+        android:background="@null"
+        android:tint="@color/right_pressed"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageButton
         android:id="@+id/wrong_button"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="@dimen/button_size"
+        android:layout_height="@dimen/button_size"
         android:layout_margin="20dp"
-        android:background="@drawable/button_background"
+        android:background="@null"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_thumb_down"
-        android:tint="@color/landDropRed"
+        android:src="@drawable/ic_wrong"
+        android:tint="@color/wrong_pressed"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

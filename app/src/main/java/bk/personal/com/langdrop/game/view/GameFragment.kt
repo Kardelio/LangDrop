@@ -15,13 +15,16 @@ import bk.personal.com.langdrop.R
 import bk.personal.com.langdrop.game.viewmodel.GameState
 import bk.personal.com.langdrop.game.viewmodel.GameViewModel
 import bk.personal.com.langdrop.model.GameWordPair
+import bk.personal.com.langdrop.utils.provideViewModel
 import bk.personal.com.langdrop.utils.transitionHelper
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class GameFragment : Fragment() {
 
-    private val viewmodel: GameViewModel by viewModels()
+    //Changed to use my overriding delegate so that
+    //i can inject a mock version of the VM in fragment tests
+    val viewmodel: GameViewModel by provideViewModel()
 
     private lateinit var motionLayout: MotionLayout
 

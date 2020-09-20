@@ -5,6 +5,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import bk.personal.com.langdrop.OpenClassOnDebug
 import bk.personal.com.langdrop.game.repository.IWordRepository
 import bk.personal.com.langdrop.game.view.GameFragment
 import bk.personal.com.langdrop.model.GameWordPair
@@ -15,6 +16,7 @@ sealed class GameState {
     object Over : GameState()
 }
 
+@OpenClassOnDebug
 class GameViewModel @ViewModelInject constructor(private val repo: IWordRepository) : ViewModel() {
 
     private val _gameState: MutableLiveData<GameState> = MutableLiveData()

@@ -154,3 +154,16 @@ changed or added here. Now onto UI Tests...
 #### Commit 7
 Updated this readme with images, hopefully they display on github correctly. I may need to use
 the http request for each instead.
+
+#### Commit 8
+List Below:
+* Added all the dependencies for androidTest and made sure it worked with few inital tests
+  - Added custom test runner to run android tests in fake hilt activity for injection
+  - Added recommended hilt fragment scenario launcher
+  - Added own by viewmodel delegate to be able to overwrite viewmodels in test to mock them
+* Changed the UI abit to make it look better
+* Added swaying motion in motion layout with falling word. Nice
+
+
+### If I had more time...
+TODO
